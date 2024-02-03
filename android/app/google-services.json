@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "134328392884",
+    "project_id": "adaptive-inscribe",
+    "storage_bucket": "adaptive-inscribe.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:134328392884:android:8c0a08ae19a13626254be1",
+        "android_client_info": {
+          "package_name": "com.adaptive_inscribe.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBElv5_hs9N5w2Qvy8KIxwBvlx9x3qPnsY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
