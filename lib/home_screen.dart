@@ -587,7 +587,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         try {
                           $showLoadingDialog(context, 'Retrieving Notes');
                           final prompt =
-                              'Create an interesting NotePade between 150 to 200 words. according to The Writing Sample :${sampleController.text}, other information is'
+                              'Create an interesting NotePade between 100 to 120 words. according to The Writing Sample :${sampleController.text}, other information is'
                               '${notetitleController.text.isEmpty ? '' : 'Notes Title Is: ${notetitleController.text} '}'
                               '${clientNameController.text.isEmpty ? '' : 'Client Name is: ${clientNameController.text} '}'
                               '${dateController.text.isEmpty ? '' : 'Date Is: ${dateController.text} '}'
@@ -610,6 +610,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           Navigator.pop(context);
                           Navigator.pop(context);
                         } catch (e) {
+                          debugPrint("💥 when generate a note:  $e");
                           debugPrint("💥 when generate a note: $e");
                           ScaffoldMessenger.of(context).showSnackBar(
                             SnackBar(
