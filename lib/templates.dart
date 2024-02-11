@@ -116,6 +116,24 @@ class _TemplatesPageState extends State<TemplatesPage> {
                                   padding: EdgeInsets.symmetric(vertical: 2.0),
                                   child: CupertinoListTile(
                                       backgroundColor: Colors.blueGrey.shade100,
+                                      title: Text("Report",
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .labelSmall!
+                                              .copyWith(
+                                                  color: Colors.blueGrey)),
+                                      subtitle: Text(
+                                          ' ${templates[index]['report']}',
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .labelLarge!
+                                              .copyWith(
+                                                  color:
+                                                      Colors.grey.shade800)))),
+                              Padding(
+                                  padding: EdgeInsets.symmetric(vertical: 2.0),
+                                  child: CupertinoListTile(
+                                      backgroundColor: Colors.blueGrey.shade100,
                                       title: Text("Date",
                                           style: Theme.of(context)
                                               .textTheme
@@ -134,14 +152,14 @@ class _TemplatesPageState extends State<TemplatesPage> {
                                   padding: EdgeInsets.symmetric(vertical: 2.0),
                                   child: CupertinoListTile(
                                       backgroundColor: Colors.blueGrey.shade100,
-                                      title: Text("Location",
+                                      title: Text("Optional 1",
                                           style: Theme.of(context)
                                               .textTheme
                                               .labelSmall!
                                               .copyWith(
                                                   color: Colors.blueGrey)),
                                       subtitle: Text(
-                                          ' ${templates[index]['location']}',
+                                          ' ${templates[index]['optional1']}',
                                           style: Theme.of(context)
                                               .textTheme
                                               .labelLarge!
@@ -152,14 +170,14 @@ class _TemplatesPageState extends State<TemplatesPage> {
                                   padding: EdgeInsets.symmetric(vertical: 2.0),
                                   child: CupertinoListTile(
                                       backgroundColor: Colors.blueGrey.shade100,
-                                      title: Text("Others",
+                                      title: Text("Optional 2",
                                           style: Theme.of(context)
                                               .textTheme
                                               .labelSmall!
                                               .copyWith(
                                                   color: Colors.blueGrey)),
                                       subtitle: Text(
-                                          ' ${templates[index]['others']}',
+                                          ' ${templates[index]['optional 2']}',
                                           style: Theme.of(context)
                                               .textTheme
                                               .labelLarge!
@@ -170,14 +188,32 @@ class _TemplatesPageState extends State<TemplatesPage> {
                                   padding: EdgeInsets.symmetric(vertical: 2.0),
                                   child: CupertinoListTile(
                                       backgroundColor: Colors.blueGrey.shade100,
-                                      title: Text("Report",
+                                      title: Text("Optional 3",
                                           style: Theme.of(context)
                                               .textTheme
                                               .labelSmall!
                                               .copyWith(
                                                   color: Colors.blueGrey)),
                                       subtitle: Text(
-                                          ' ${templates[index]['report']}',
+                                          ' ${templates[index]['optional 3']}',
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .labelLarge!
+                                              .copyWith(
+                                                  color:
+                                                      Colors.grey.shade800)))),
+                              Padding(
+                                  padding: EdgeInsets.symmetric(vertical: 2.0),
+                                  child: CupertinoListTile(
+                                      backgroundColor: Colors.blueGrey.shade100,
+                                      title: Text("Optional 4",
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .labelSmall!
+                                              .copyWith(
+                                                  color: Colors.blueGrey)),
+                                      subtitle: Text(
+                                          ' ${templates[index]['optional 4']}',
                                           style: Theme.of(context)
                                               .textTheme
                                               .labelLarge!
@@ -185,110 +221,122 @@ class _TemplatesPageState extends State<TemplatesPage> {
                                                   color:
                                                       Colors.grey.shade800)))),
                               Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
-                                children: [
-                                  Center(
-                                    child: SizedBox(
-                                      width: MediaQuery.of(context).size.width *
-                                          0.4,
-                                      child: ElevatedButton(
-                                          style: ButtonStyle(
-                                              shape: MaterialStateProperty.all(
-                                                  BeveledRectangleBorder(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              15))),
-                                              backgroundColor:
-                                                  MaterialStateProperty.all(
-                                                      Colors.red.shade200)),
-                                          onPressed: () {
-                                            showCupertinoDialog(
-                                                context: context,
-                                                builder:
-                                                    (BuildContext context) {
-                                                  return CupertinoAlertDialog(
-                                                    title: const Text(
-                                                        'Want to Delete'),
-                                                    actions: [
-                                                      CupertinoButton(
-                                                          onPressed: () {
-                                                            deleteTemplate(
-                                                                index);
-                                                            setState(() {});
-                                                            getTemplateDataF();
-                                                            Navigator.pop(
-                                                                context);
-                                                          },
-                                                          child: Text(
-                                                            'Yes',
-                                                            style: TextStyle(
-                                                                color:
-                                                                    Colors.red),
-                                                          )),
-                                                      CupertinoButton(
-                                                          onPressed: () {
-                                                            Navigator.pop(
-                                                                context);
-                                                          },
-                                                          child: Text(
-                                                            'No',
-                                                            style: TextStyle(
-                                                                color: Colors
-                                                                    .blueGrey
-                                                                    .shade300),
-                                                          )),
-                                                    ],
-                                                    insetAnimationCurve:
-                                                        Curves.slowMiddle,
-                                                    insetAnimationDuration:
-                                                        const Duration(
-                                                            seconds: 2),
-                                                  );
-                                                });
-                                          },
-                                          child: Text(
-                                            'Delete',
-                                            style:
-                                                TextStyle(color: Colors.white),
-                                          )),
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceEvenly,
+                                  children: [
+                                    Center(
+                                      child: SizedBox(
+                                        width:
+                                            MediaQuery.of(context).size.width *
+                                                0.4,
+                                        child: ElevatedButton(
+                                            style: ButtonStyle(
+                                                shape: MaterialStateProperty
+                                                    .all(BeveledRectangleBorder(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(15))),
+                                                backgroundColor:
+                                                    MaterialStateProperty.all(
+                                                        Colors.red.shade200)),
+                                            onPressed: () {
+                                              showCupertinoDialog(
+                                                  context: context,
+                                                  builder:
+                                                      (BuildContext context) {
+                                                    return CupertinoAlertDialog(
+                                                      title: const Text(
+                                                          'Want to Delete'),
+                                                      actions: [
+                                                        CupertinoButton(
+                                                            onPressed: () {
+                                                              deleteTemplate(
+                                                                  index);
+                                                              setState(() {});
+                                                              getTemplateDataF();
+                                                              Navigator.pop(
+                                                                  context);
+                                                            },
+                                                            child: Text(
+                                                              'Yes',
+                                                              style: TextStyle(
+                                                                  color: Colors
+                                                                      .red),
+                                                            )),
+                                                        CupertinoButton(
+                                                            onPressed: () {
+                                                              Navigator.pop(
+                                                                  context);
+                                                            },
+                                                            child: Text(
+                                                              'No',
+                                                              style: TextStyle(
+                                                                  color: Colors
+                                                                      .blueGrey
+                                                                      .shade300),
+                                                            )),
+                                                      ],
+                                                      insetAnimationCurve:
+                                                          Curves.slowMiddle,
+                                                      insetAnimationDuration:
+                                                          const Duration(
+                                                              seconds: 2),
+                                                    );
+                                                  });
+                                            },
+                                            child: Text(
+                                              'Delete',
+                                              style: TextStyle(
+                                                  color: Colors.white),
+                                            )),
+                                      ),
                                     ),
-                                  ),
-                                  Center(
-                                    child: SizedBox(
-                                      width: MediaQuery.of(context).size.width *
-                                          0.4,
-                                      child: ElevatedButton(
-                                          style: ButtonStyle(
-                                              shape: MaterialStateProperty.all(
-                                                  BeveledRectangleBorder(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              15))),
-                                              backgroundColor:
-                                                  MaterialStateProperty.all(
-                                                      Colors.orange.shade200)),
-                                          onPressed: () {
-                                            showTemplateAlertForEditF(
-                                                context,
-                                                index,
-                                                templates[index]['name'],
-                                                templates[index]['sample'],
-                                                templates[index]['clientName'],
-                                                templates[index]['date'],
-                                                templates[index]['location'],
-                                                templates[index]['others'],
-                                                templates[index]['report']);
-                                          },
-                                          child: Text(
-                                            'Edit',
-                                            style:
-                                                TextStyle(color: Colors.white),
-                                          )),
-                                    ),
-                                  ),
-                                ],
-                              )
+                                    Center(
+                                        child: SizedBox(
+                                            width:
+                                                MediaQuery.of(context).size.width *
+                                                    0.4,
+                                            child: ElevatedButton(
+                                                style: ButtonStyle(
+                                                    shape: MaterialStateProperty.all(
+                                                        BeveledRectangleBorder(
+                                                            borderRadius:
+                                                                BorderRadius.circular(
+                                                                    15))),
+                                                    backgroundColor:
+                                                        MaterialStateProperty.all(
+                                                            Colors.orange
+                                                                .shade200)),
+                                                onPressed: () {
+                                                  showTemplateAlertForEditF(
+                                                      context,
+                                                      index: index,
+                                                      templateName:
+                                                          templates[index]
+                                                              ['name'],
+                                                      sample: templates[index]
+                                                          ['sample'],
+                                                      report: templates[index]
+                                                          ['report'],
+                                                      date: templates[index]
+                                                          ['date'],
+                                                      optional1:
+                                                          templates[index]
+                                                              ['optional1'],
+                                                      optional2:
+                                                          templates[index]
+                                                              ['optional2'],
+                                                      optional3:
+                                                          templates[index]
+                                                              ['optional3'],
+                                                      optional4:
+                                                          templates[index]
+                                                              ['optional4']);
+                                                },
+                                                child: Text('Edit',
+                                                    style: TextStyle(
+                                                        color: Colors.white)))))
+                                  ])
                             ],
                           ),
                         ),
@@ -314,22 +362,32 @@ class _TemplatesPageState extends State<TemplatesPage> {
     });
   }
 
-  showTemplateAlertForEditF(context, index, templateName, sample, clientName,
-      date, location, others, report) {
+  showTemplateAlertForEditF(context,
+      {int index = 0,
+      String templateName = "",
+      String sample = "",
+      String report = "",
+      String date = "",
+      String optional1 = "",
+      String optional2 = "",
+      String optional3 = "",
+      String optional4 = ""}) {
     TextEditingController templateNameController = TextEditingController();
-    TextEditingController clientNameController = TextEditingController();
-    TextEditingController dateController = TextEditingController();
-    TextEditingController locationController = TextEditingController();
-    TextEditingController othersController = TextEditingController();
-    TextEditingController reportController = TextEditingController();
     TextEditingController writingSamplesController = TextEditingController();
-    templateNameController.text = templateName ?? '';
-    writingSamplesController.text = sample ?? '';
-    clientNameController.text = clientName ?? '';
-    dateController.text = date ?? '';
-    locationController.text = location ?? '';
-    othersController.text = others ?? '';
-    reportController.text = report ?? '';
+    TextEditingController reportController = TextEditingController();
+    TextEditingController dateController = TextEditingController();
+    TextEditingController optionalController1 = TextEditingController();
+    TextEditingController optionalController2 = TextEditingController();
+    TextEditingController optionalController3 = TextEditingController();
+    TextEditingController optionalController4 = TextEditingController();
+    templateNameController.text = templateName;
+    writingSamplesController.text = sample;
+    reportController.text = report;
+    dateController.text = date;
+    optionalController1.text = optional1;
+    optionalController2.text = optional2;
+    optionalController3.text = optional3;
+    optionalController4.text = optional4;
     showCupertinoDialog(
         context: context,
         builder: (BuildContext context) {
@@ -367,8 +425,27 @@ class _TemplatesPageState extends State<TemplatesPage> {
                                       hintStyle: TextStyle(
                                           color: Colors.blueGrey.shade300)))))),
                   Center(child: Text("Details")),
-                  texteditingforalert(
-                      controller: clientNameController, hint: "Client Name"),
+                  Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 3.0),
+                      child: Container(
+                          decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(14)),
+                          child: Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 8),
+                              child: TextField(
+                                  controller: reportController,
+                                  minLines: 2,
+                                  maxLines: null,
+                                  decoration: InputDecoration(
+                                      border: InputBorder.none,
+                                      focusedBorder: InputBorder.none,
+                                      enabledBorder: InputBorder.none,
+                                      hintText: 'Report',
+                                      hintStyle: TextStyle(
+                                          color: Colors.blueGrey.shade300)))))),
+
                   texteditingforalert(
                       controller: dateController,
                       hint: "Date",
@@ -392,33 +469,20 @@ class _TemplatesPageState extends State<TemplatesPage> {
                         icon: Icon(Icons.date_range_outlined),
                       )),
                   texteditingforalert(
-                      controller: locationController, hint: "Location"),
-                  Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 3.0),
-                      child: Container(
-                          decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(14)),
-                          child: Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 8),
-                              child: TextField(
-                                  controller: othersController,
-                                  minLines: 2,
-                                  maxLines: null,
-                                  decoration: InputDecoration(
-                                      border: InputBorder.none,
-                                      focusedBorder: InputBorder.none,
-                                      enabledBorder: InputBorder.none,
-                                      hintText: 'Others',
-                                      hintStyle: TextStyle(
-                                          color: Colors.blueGrey.shade300)))))),
-                  Opacity(
-                      opacity: 0.5,
-                      child: texteditingforalert(
-                          controller: reportController,
-                          hint: "Report",
-                          isEnable: false)),
+                      controller: optionalController1, hint: "Optional 1"),
+                  texteditingforalert(
+                      controller: optionalController2, hint: "Optional 2"),
+                  texteditingforalert(
+                      controller: optionalController3, hint: "Optional 3"),
+                  texteditingforalert(
+                      controller: optionalController4, hint: "Optional 4"),
+
+                  // Opacity(
+                  //     opacity: 0.5,
+                  //     child: texteditingforalert(
+                  //         controller: reportController,
+                  //         hint: "Report",
+                  //         isEnable: false)),
                 ],
               ),
               actions: [
@@ -453,11 +517,12 @@ class _TemplatesPageState extends State<TemplatesPage> {
                         data[index] = {
                           'name': templateNameController.text ?? '',
                           'sample': writingSamplesController.text ?? '',
-                          'clientName': clientNameController.text ?? '',
-                          'date': dateController.text ?? '',
-                          'location': locationController.text ?? '',
-                          'others': othersController.text ?? '',
                           'report': reportController.text ?? '',
+                          'date': dateController.text ?? '',
+                          'optional1': optionalController1.text ?? '',
+                          'optional2': optionalController2.text ?? '',
+                          'optional3': optionalController3.text ?? '',
+                          'optional4': optionalController4.text ?? '',
                         };
 
                         box.put('templateskey', data);
@@ -478,12 +543,13 @@ class _TemplatesPageState extends State<TemplatesPage> {
 
   showTemplateAlertF(context) {
     TextEditingController templateNameController = TextEditingController();
-    TextEditingController clientNameController = TextEditingController();
-    TextEditingController dateController = TextEditingController();
-    TextEditingController locationController = TextEditingController();
-    TextEditingController othersController = TextEditingController();
-    TextEditingController reportController = TextEditingController();
     TextEditingController writingSamplesController = TextEditingController();
+    TextEditingController dateController = TextEditingController();
+    TextEditingController reportController = TextEditingController();
+    TextEditingController optionalController1 = TextEditingController();
+    TextEditingController optionalController2 = TextEditingController();
+    TextEditingController optionalController3 = TextEditingController();
+    TextEditingController optionalController4 = TextEditingController();
 
     showCupertinoDialog(
         context: context,
@@ -519,8 +585,26 @@ class _TemplatesPageState extends State<TemplatesPage> {
                                       hintStyle: TextStyle(
                                           color: Colors.blueGrey.shade300)))))),
                   Center(child: Text("Details")),
-                  texteditingforalert(
-                      controller: clientNameController, hint: "Client Name"),
+                  Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 1.0),
+                      child: Container(
+                          decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(14)),
+                          child: Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 8),
+                              child: TextField(
+                                  controller: reportController,
+                                  minLines: 2,
+                                  maxLines: null,
+                                  decoration: InputDecoration(
+                                      border: InputBorder.none,
+                                      focusedBorder: InputBorder.none,
+                                      enabledBorder: InputBorder.none,
+                                      hintText: 'Report',
+                                      hintStyle: TextStyle(
+                                          color: Colors.blueGrey.shade300)))))),
                   texteditingforalert(
                       controller: dateController,
                       hint: "Date",
@@ -544,38 +628,20 @@ class _TemplatesPageState extends State<TemplatesPage> {
                         icon: Icon(Icons.date_range_outlined),
                       )),
                   texteditingforalert(
-                      controller: locationController, hint: "Location"),
+                      controller: optionalController1, hint: "Optional 1"),
+                  texteditingforalert(
+                      controller: optionalController2, hint: "Optional 2"),
+                  texteditingforalert(
+                      controller: optionalController3, hint: "Optional 3"),
+                  texteditingforalert(
+                      controller: optionalController4, hint: "Optional 4"),
 
-                  // texteditingforalert(
-                  //     controller: reportController,
-                  //     hint: "Report")
-
-                  Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 1.0),
-                      child: Container(
-                          decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(14)),
-                          child: Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 8),
-                              child: TextField(
-                                  controller: othersController,
-                                  minLines: 2,
-                                  maxLines: null,
-                                  decoration: InputDecoration(
-                                      border: InputBorder.none,
-                                      focusedBorder: InputBorder.none,
-                                      enabledBorder: InputBorder.none,
-                                      hintText: 'Others',
-                                      hintStyle: TextStyle(
-                                          color: Colors.blueGrey.shade300)))))),
-                  Opacity(
-                      opacity: 0.5,
-                      child: texteditingforalert(
-                          controller: reportController,
-                          hint: "Report",
-                          isEnable: false)),
+                  // Opacity(
+                  //     opacity: 0.5,
+                  //     child: texteditingforalert(
+                  //         controller: reportController,
+                  //         hint: "Report",
+                  //         isEnable: false)),
                 ],
               ),
               actions: [
@@ -591,17 +657,17 @@ class _TemplatesPageState extends State<TemplatesPage> {
                         showSnackbarF(msg: "Required Name", context: context);
                       } else if (writingSamplesController.text.trim().isEmpty) {
                         showSnackbarF(msg: "Write Sample", context: context);
-                      } else if (clientNameController.text.trim().isEmpty) {
-                        showSnackbarF(
-                            msg: "Required Client Name", context: context);
-                      } else if (dateController.text.trim().isEmpty) {
-                        showSnackbarF(msg: "Required Date", context: context);
-                      } else if (locationController.text.trim().isEmpty) {
-                        showSnackbarF(
-                            msg: "Required Location", context: context);
-                      } else if (othersController.text.trim().isEmpty) {
-                        showSnackbarF(
-                            msg: "Required Others Field", context: context);
+                        // } else if (clientNameController.text.trim().isEmpty) {
+                        //   showSnackbarF(
+                        //       msg: "Required Client Name", context: context);
+                        // } else if (dateController.text.trim().isEmpty) {
+                        //   showSnackbarF(msg: "Required Date", context: context);
+                        // } else if (locationController.text.trim().isEmpty) {
+                        //   showSnackbarF(
+                        //       msg: "Required Location", context: context);
+                        // } else if (othersController.text.trim().isEmpty) {
+                        //   showSnackbarF(
+                        //       msg: "Required Others Field", context: context);
                       } else {
                         // await Hive.openBox("templates");
                         var box = Hive.box('templates');
@@ -609,11 +675,12 @@ class _TemplatesPageState extends State<TemplatesPage> {
                         final tempData = {
                           'name': templateNameController.text,
                           'sample': writingSamplesController.text,
-                          'clientName': clientNameController.text,
-                          'date': dateController.text,
-                          'location': locationController.text,
-                          'others': othersController.text,
                           'report': reportController.text,
+                          'date': dateController.text,
+                          'optional1': optionalController1.text ?? '',
+                          'optional2': optionalController2.text ?? '',
+                          'optional3': optionalController3.text ?? '',
+                          'optional4': optionalController4.text ?? '',
                         };
 
                         // final tempData = Template(

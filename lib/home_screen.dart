@@ -579,10 +579,10 @@ class _HomeScreenState extends State<HomeScreen> {
                         _titleController.requestFocus();
                         Utils.flushBarErrorMessage(
                             'Please enter title', context);
-                      } else if (othersController.text.isEmpty) {
-                        _descriptionController.requestFocus();
-                        Utils.flushBarErrorMessage(
-                            'Please enter others Filed', context);
+                        // } else if (othersController.text.isEmpty) {
+                        //   _descriptionController.requestFocus();
+                        //   Utils.flushBarErrorMessage(
+                        //       'Please enter others Filed', context);
                       } else {
                         try {
                           $showLoadingDialog(context, 'Retrieving Notes');
