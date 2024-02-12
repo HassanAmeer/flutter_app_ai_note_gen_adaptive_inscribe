@@ -36,11 +36,12 @@ class _HomeScreenState extends State<HomeScreen> {
   /////////////
   TextEditingController notetitleController = TextEditingController();
   TextEditingController sampleController = TextEditingController(text: " ");
-  TextEditingController clientNameController = TextEditingController(text: " ");
-  TextEditingController dateController = TextEditingController(text: " ");
-  TextEditingController locationController = TextEditingController(text: " ");
   TextEditingController reportController = TextEditingController(text: " ");
-  TextEditingController othersController = TextEditingController(text: " ");
+  TextEditingController dateController = TextEditingController(text: " ");
+  TextEditingController optionalController1 = TextEditingController();
+  TextEditingController optionalController2 = TextEditingController();
+  TextEditingController optionalController3 = TextEditingController();
+  TextEditingController optionalController4 = TextEditingController();
 
   FocusNode _titleController = FocusNode();
   FocusNode _descriptionController = FocusNode();
@@ -470,177 +471,194 @@ class _HomeScreenState extends State<HomeScreen> {
     return showDialog(
         context: context,
         builder: (context) {
-          return AlertDialog(
-            title: Text('Create New Note'),
-            content: SingleChildScrollView(
-                child: Column(children: [
-              TextFormField(
-                  controller: notetitleController,
-                  decoration: const InputDecoration(
-                      hintText: 'Note title', border: OutlineInputBorder())),
-              const SizedBox(height: 5),
-              DropdownButton(
-                  // value: selectTemplate ?? "Select Template",
-                  items: templates
-                      .map<DropdownMenuItem<dynamic>>((dynamic template) {
-                    return DropdownMenuItem<dynamic>(
-                        value: template,
-                        child: Text(template['name'] ?? 'Template'));
-                  }).toList(),
-                  onChanged: (dynamic selectedTemplate) {
-                    // print('Selected template: $selectedTemplate');
-                    // notetitleController.text =
-                    //     selectedTemplate['name'] ?? '';
-                    // selectTemplate = selectedTemplate ?? 'Select Template';
-                    hintController.text = selectedTemplate['name'] ?? '';
-                    sampleController.text = selectedTemplate['sample'] ?? '';
-                    templateValueName = selectedTemplate['name'] ?? '';
-                    clientNameController.text =
-                        selectedTemplate['clientName'] ?? '';
-                    dateController.text = selectedTemplate['date'] ?? '';
-                    locationController.text =
-                        selectedTemplate['location'] ?? '';
-                    reportController.text = selectedTemplate['report'] ?? '';
-                    othersController.text = selectedTemplate['others'] ?? '';
-                    updateSelectTemlateHintF(
-                        selectedTemplate['name'] ?? 'Select Template');
-                    // report
-                    setState(() {});
-                  },
-                  hint: Text(templateValueName.toString())),
-              // hint: SizedBox(
-              //   height: 20,
-              //   child: Expanded(
-              //     child: TextField(
-              //       enabled: false,
-              //       controller: hintController,
-              //       decoration: InputDecoration(border: InputBorder.none),
-              //     ),
-              //   ),
-              // )),
-              const SizedBox(height: 10),
-              // Text(
-              //   templateValueName,
-              //   style: Theme.of(context)
-              //       .textTheme
-              //       .titleMedium!
-              //       .copyWith(color: Colors.blueAccent),
-              // ),
-              Text("Details",
-                  style: TextStyle(fontSize: 15, fontWeight: FontWeight.w500)),
-              const SizedBox(height: 5),
-              TextFormField(
-                  controller: sampleController,
-                  decoration: const InputDecoration(
-                      hintText: 'Sample', border: OutlineInputBorder())),
-              const SizedBox(height: 5),
-              TextFormField(
-                  controller: clientNameController,
-                  decoration: const InputDecoration(
-                      hintText: 'Name', border: OutlineInputBorder())),
-              const SizedBox(height: 5),
-              TextFormField(
-                  controller: dateController,
-                  decoration: const InputDecoration(
-                      hintText: 'Date', border: OutlineInputBorder())),
-              const SizedBox(height: 5),
-              TextFormField(
-                  controller: locationController,
-                  decoration: const InputDecoration(
-                      hintText: 'Location', border: OutlineInputBorder())),
-              const SizedBox(height: 5),
-              TextFormField(
-                  controller: othersController,
-                  decoration: const InputDecoration(
-                      hintText: 'Others', border: OutlineInputBorder())),
-              TextFormField(
-                  controller: reportController,
-                  decoration: const InputDecoration(
-                      hintText: 'Report', border: OutlineInputBorder())),
-              const SizedBox(height: 5),
-            ])),
-            //       final result = await GptApiService().messageCompletion(
-            //     ChatGPTCompletionRequest(prompt: prompt, user: userID));
-            // story = result.choices.first.text;
-            actions: [
-              Padding(
-                padding: const EdgeInsets.only(bottom: 0),
-                child: TextButton(
-                    onPressed: () {
-                      Navigator.pop(context);
+          return StatefulBuilder(builder: (context, setStates) {
+            return AlertDialog(
+              title: Text('Create New Note'),
+              content: SingleChildScrollView(
+                  child: Column(children: [
+                TextFormField(
+                    controller: notetitleController,
+                    decoration: const InputDecoration(
+                        hintText: 'Note title', border: OutlineInputBorder())),
+                const SizedBox(height: 5),
+                DropdownButton(
+                    // value: selectTemplate ?? "Select Template",
+                    items: templates
+                        .map<DropdownMenuItem<dynamic>>((dynamic template) {
+                      return DropdownMenuItem<dynamic>(
+                          value: template,
+                          child: Text(template['name'] ?? 'Template'));
+                    }).toList(),
+                    onChanged: (dynamic selectedTemplate) {
+                      // print('Selected template: $selectedTemplate');
+                      // notetitleController.text =
+                      //     selectedTemplate['name'] ?? '';
+                      // selectTemplate = selectedTemplate ?? 'Select Template';
+                      hintController.text = selectedTemplate['name'] ?? '';
+                      sampleController.text = selectedTemplate['sample'] ?? '';
+                      reportController.text = selectedTemplate['report'] ?? '';
+                      dateController.text = selectedTemplate['date'] ?? '';
+                      optionalController1.text =
+                          selectedTemplate['optional1'] ?? '';
+                      optionalController2.text =
+                          selectedTemplate['optional2'] ?? '';
+                      optionalController3.text =
+                          selectedTemplate['optional3'] ?? '';
+                      optionalController4.text =
+                          selectedTemplate['optional4'] ?? '';
+                      updateSelectTemlateHintF(
+                          selectedTemplate['name'] ?? 'Select a template');
+                      // report
+                      setStates(() {});
                     },
-                    child: const Text('Cancel')),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(right: 10, bottom: 0),
-                child: TextButton(
-                    onPressed: () async {
-                      if (notetitleController.text.isEmpty) {
-                        _titleController.requestFocus();
-                        Utils.flushBarErrorMessage(
-                            'Please enter title', context);
-                        // } else if (othersController.text.isEmpty) {
-                        //   _descriptionController.requestFocus();
-                        //   Utils.flushBarErrorMessage(
-                        //       'Please enter others Filed', context);
-                      } else {
-                        try {
-                          $showLoadingDialog(context, 'Retrieving Notes');
-                          final prompt =
-                              'Create an interesting NotePade between 100 to 120 words. according to The Writing Sample :${sampleController.text}, other information is'
-                              '${notetitleController.text.isEmpty ? '' : 'Notes Title Is: ${notetitleController.text} '}'
-                              '${clientNameController.text.isEmpty ? '' : 'Client Name is: ${clientNameController.text} '}'
-                              '${dateController.text.isEmpty ? '' : 'Date Is: ${dateController.text} '}'
-                              '${locationController.text.isEmpty ? '' : 'Location Is ${locationController.text} '}'
-                              '${reportController.text.isEmpty ? '' : 'Report Is: ${reportController.text} '}'
-                              '${othersController.text.isEmpty ? '' : 'other details is: ${othersController.text} '}';
+                    hint: Text(templateValueName.toString())),
+                const SizedBox(height: 10),
+                templateValueName == "Select a template"
+                    ? Text('')
+                    : Column(children: [
+                        Text("Details",
+                            style: TextStyle(
+                                fontSize: 15, fontWeight: FontWeight.w500)),
+                        const SizedBox(height: 5),
+                        TextFormField(
+                            controller: sampleController,
+                            minLines: 2,
+                            maxLines: 2,
+                            decoration: const InputDecoration(
+                                hintText: 'Sample',
+                                border: OutlineInputBorder())),
+                        const SizedBox(height: 5),
+                        TextFormField(
+                            controller: reportController,
+                            minLines: 2,
+                            maxLines: 2,
+                            decoration: const InputDecoration(
+                                hintText: 'Report',
+                                border: OutlineInputBorder())),
+                        const SizedBox(height: 5),
+                        dateController.text.toString().trim().isEmpty
+                            ? SizedBox(height: 0)
+                            : TextFormField(
+                                controller: dateController,
+                                decoration: const InputDecoration(
+                                    hintText: 'Date',
+                                    border: OutlineInputBorder())),
+                        const SizedBox(height: 5),
+                        optionalController1.text.toString().trim().isEmpty
+                            ? SizedBox(height: 0)
+                            : TextFormField(
+                                controller: optionalController1,
+                                decoration: const InputDecoration(
+                                    hintText: 'Optional 1',
+                                    border: OutlineInputBorder())),
+                        const SizedBox(height: 5),
+                        optionalController2.text.toString().trim().isEmpty
+                            ? SizedBox(height: 0)
+                            : TextFormField(
+                                controller: optionalController2,
+                                decoration: const InputDecoration(
+                                    hintText: 'Optional 2',
+                                    border: OutlineInputBorder())),
+                        const SizedBox(height: 5),
+                        optionalController3.text.toString().trim().isEmpty
+                            ? SizedBox(height: 0)
+                            : TextFormField(
+                                controller: optionalController3,
+                                decoration: const InputDecoration(
+                                    hintText: 'Optional 3',
+                                    border: OutlineInputBorder())),
+                        const SizedBox(height: 5),
+                        optionalController4.text.toString().trim().isEmpty
+                            ? SizedBox(height: 0)
+                            : TextFormField(
+                                controller: optionalController4,
+                                decoration: const InputDecoration(
+                                    hintText: 'Optional 4',
+                                    border: OutlineInputBorder())),
+                      ]),
+                const SizedBox(height: 5),
+              ])),
+              actions: [
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 0),
+                  child: TextButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      child: const Text('Cancel')),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(right: 10, bottom: 0),
+                  child: TextButton(
+                      onPressed: () async {
+                        if (notetitleController.text.isEmpty) {
+                          _titleController.requestFocus();
+                          Utils.flushBarErrorMessage(
+                              'Please enter title', context);
+                        } else {
+                          try {
+                            $showLoadingDialog(context, 'Retrieving Notes');
+                            final prompt =
+                                'Create an Cover Letter between 100 to 120 words. according to The main data is Writing Sample: ${sampleController.text}, and report: ${reportController.text}, and little bit information if need from these:';
+                            '${dateController.text.isEmpty ? '' : '${dateController.text} '}'
+                                '${optionalController1.text.isEmpty ? '' : '${optionalController1.text} '}'
+                                '${optionalController2.text.isEmpty ? '' : '${optionalController2.text} '}'
+                                '${optionalController3.text.isEmpty ? '' : '${optionalController3.text} '}'
+                                '${optionalController4.text.isEmpty ? '' : '${optionalController4.text} '}';
 
-                          final result = await GptApiService()
-                              .messageCompletion(
-                                  ChatGPTCompletionRequest(prompt: prompt));
-                          final resultDecode = result.choices.first.text;
-                          debugPrint("👉" + resultDecode.toString());
-                          final data = NotesModel(
-                              title: notetitleController.text,
-                              description: resultDecode.toString());
-                          final box = Boxes.getData();
-                          box.add(data);
-                          // notetitleController.clear();
-                          // othersController.clear();
-                          Navigator.pop(context);
-                          Navigator.pop(context);
-                        } catch (e) {
-                          debugPrint("💥 when generate a note:  $e");
-                          debugPrint("💥 when generate a note: $e");
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(
-                              content: Text('$e'),
-                              duration: const Duration(seconds: 4),
-                              action: SnackBarAction(
-                                label: 'Undo',
-                                onPressed: () {},
+                            final result = await GptApiService()
+                                .messageCompletion(
+                                    ChatGPTCompletionRequest(prompt: prompt));
+                            final resultDecode = result.choices.first.text;
+                            // debugPrint("👉" + resultDecode.toString());
+                            final data = NotesModel(
+                                title: notetitleController.text,
+                                description: resultDecode.toString() +
+                                    "\n" +
+                                    '${dateController.text.isEmpty ? '' : dateController.text} \n'
+                                        '${optionalController1.text.isEmpty ? '' : optionalController1.text}\n'
+                                        '${optionalController2.text.isEmpty ? '' : optionalController2.text}\n'
+                                        '${optionalController3.text.isEmpty ? '' : optionalController3.text}\n'
+                                        '${optionalController4.text.isEmpty ? '' : optionalController4.text}\n');
+                            final box = Boxes.getData();
+                            box.add(data);
+                            // notetitleController.clear();
+                            // othersController.clear();
+                            Navigator.pop(context);
+                            Navigator.pop(context);
+                          } catch (e) {
+                            debugPrint("💥 when generate a note:  $e");
+                            debugPrint("💥 when generate a note: $e");
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: Text('$e'),
+                                duration: const Duration(seconds: 4),
+                                action: SnackBarAction(
+                                  label: 'Undo',
+                                  onPressed: () {},
+                                ),
                               ),
-                            ),
-                          );
-                          Navigator.pop(context);
+                            );
+                            Navigator.pop(context);
+                          }
                         }
-                      }
-                    },
-                    child: Container(
-                        decoration: BoxDecoration(
-                          color: Color(0xFF00BCE3),
-                          shape: BoxShape.circle,
-                        ),
-                        height: 50,
-                        width: 70,
-                        child: Center(
-                            child: const Text(
-                          'Go',
-                          style: TextStyle(color: Colors.black),
-                        )))),
-              ),
-            ],
-          );
+                      },
+                      child: Container(
+                          decoration: BoxDecoration(
+                            color: Color(0xFF00BCE3),
+                            shape: BoxShape.circle,
+                          ),
+                          height: 50,
+                          width: 70,
+                          child: Center(
+                              child: const Text(
+                            'Go',
+                            style: TextStyle(color: Colors.black),
+                          )))),
+                ),
+              ],
+            );
+          });
         });
   }
 }

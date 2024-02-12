@@ -80,24 +80,6 @@ class _TemplatesPageState extends State<TemplatesPage> {
                                   padding: EdgeInsets.symmetric(vertical: 2.0),
                                   child: CupertinoListTile(
                                       backgroundColor: Colors.blueGrey.shade100,
-                                      title: Text("Client Name",
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .labelSmall!
-                                              .copyWith(
-                                                  color: Colors.blueGrey)),
-                                      subtitle: Text(
-                                          ' ${templates[index]['clientName']}',
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .labelLarge!
-                                              .copyWith(
-                                                  color:
-                                                      Colors.grey.shade800)))),
-                              Padding(
-                                  padding: EdgeInsets.symmetric(vertical: 2.0),
-                                  child: CupertinoListTile(
-                                      backgroundColor: Colors.blueGrey.shade100,
                                       title: Text("Sample",
                                           style: Theme.of(context)
                                               .textTheme
@@ -130,96 +112,116 @@ class _TemplatesPageState extends State<TemplatesPage> {
                                               .copyWith(
                                                   color:
                                                       Colors.grey.shade800)))),
-                              Padding(
-                                  padding: EdgeInsets.symmetric(vertical: 2.0),
-                                  child: CupertinoListTile(
-                                      backgroundColor: Colors.blueGrey.shade100,
-                                      title: Text("Date",
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .labelSmall!
-                                              .copyWith(
-                                                  color: Colors.blueGrey)),
-                                      subtitle: Text(
-                                          ' ${templates[index]['date']}',
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .labelLarge!
-                                              .copyWith(
-                                                  color:
-                                                      Colors.grey.shade800)))),
-                              Padding(
-                                  padding: EdgeInsets.symmetric(vertical: 2.0),
-                                  child: CupertinoListTile(
-                                      backgroundColor: Colors.blueGrey.shade100,
-                                      title: Text("Optional 1",
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .labelSmall!
-                                              .copyWith(
-                                                  color: Colors.blueGrey)),
-                                      subtitle: Text(
-                                          ' ${templates[index]['optional1']}',
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .labelLarge!
-                                              .copyWith(
-                                                  color:
-                                                      Colors.grey.shade800)))),
-                              Padding(
-                                  padding: EdgeInsets.symmetric(vertical: 2.0),
-                                  child: CupertinoListTile(
-                                      backgroundColor: Colors.blueGrey.shade100,
-                                      title: Text("Optional 2",
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .labelSmall!
-                                              .copyWith(
-                                                  color: Colors.blueGrey)),
-                                      subtitle: Text(
-                                          ' ${templates[index]['optional 2']}',
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .labelLarge!
-                                              .copyWith(
-                                                  color:
-                                                      Colors.grey.shade800)))),
-                              Padding(
-                                  padding: EdgeInsets.symmetric(vertical: 2.0),
-                                  child: CupertinoListTile(
-                                      backgroundColor: Colors.blueGrey.shade100,
-                                      title: Text("Optional 3",
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .labelSmall!
-                                              .copyWith(
-                                                  color: Colors.blueGrey)),
-                                      subtitle: Text(
-                                          ' ${templates[index]['optional 3']}',
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .labelLarge!
-                                              .copyWith(
-                                                  color:
-                                                      Colors.grey.shade800)))),
-                              Padding(
-                                  padding: EdgeInsets.symmetric(vertical: 2.0),
-                                  child: CupertinoListTile(
-                                      backgroundColor: Colors.blueGrey.shade100,
-                                      title: Text("Optional 4",
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .labelSmall!
-                                              .copyWith(
-                                                  color: Colors.blueGrey)),
-                                      subtitle: Text(
-                                          ' ${templates[index]['optional 4']}',
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .labelLarge!
-                                              .copyWith(
-                                                  color:
-                                                      Colors.grey.shade800)))),
+                              templates[index]['date'].toString().isEmpty
+                                  ? SizedBox(height: 0)
+                                  : Padding(
+                                      padding:
+                                          EdgeInsets.symmetric(vertical: 2.0),
+                                      child: CupertinoListTile(
+                                          backgroundColor:
+                                              Colors.blueGrey.shade100,
+                                          title: Text("Date",
+                                              style: Theme.of(context)
+                                                  .textTheme
+                                                  .labelSmall!
+                                                  .copyWith(
+                                                      color: Colors.blueGrey)),
+                                          subtitle: Text(
+                                              ' ${templates[index]['date']}',
+                                              style: Theme.of(context)
+                                                  .textTheme
+                                                  .labelLarge!
+                                                  .copyWith(
+                                                      color: Colors
+                                                          .grey.shade800)))),
+                              templates[index]['optional1'].toString().isEmpty
+                                  ? SizedBox(height: 0)
+                                  : Padding(
+                                      padding:
+                                          EdgeInsets.symmetric(vertical: 2.0),
+                                      child: CupertinoListTile(
+                                          backgroundColor:
+                                              Colors.blueGrey.shade100,
+                                          title: Text("Optional 1",
+                                              style: Theme.of(context)
+                                                  .textTheme
+                                                  .labelSmall!
+                                                  .copyWith(
+                                                      color: Colors.blueGrey)),
+                                          subtitle: Text(
+                                              ' ${templates[index]['optional1']}',
+                                              style: Theme.of(context)
+                                                  .textTheme
+                                                  .labelLarge!
+                                                  .copyWith(
+                                                      color: Colors
+                                                          .grey.shade800)))),
+                              templates[index]['optional2'].toString().isEmpty
+                                  ? SizedBox(height: 0)
+                                  : Padding(
+                                      padding:
+                                          EdgeInsets.symmetric(vertical: 2.0),
+                                      child: CupertinoListTile(
+                                          backgroundColor:
+                                              Colors.blueGrey.shade100,
+                                          title: Text("Optional 2",
+                                              style: Theme.of(context)
+                                                  .textTheme
+                                                  .labelSmall!
+                                                  .copyWith(
+                                                      color: Colors.blueGrey)),
+                                          subtitle: Text(
+                                              ' ${templates[index]['optional2']}',
+                                              style: Theme.of(context)
+                                                  .textTheme
+                                                  .labelLarge!
+                                                  .copyWith(
+                                                      color: Colors
+                                                          .grey.shade800)))),
+                              templates[index]['optional3'].toString().isEmpty
+                                  ? SizedBox(height: 0)
+                                  : Padding(
+                                      padding:
+                                          EdgeInsets.symmetric(vertical: 2.0),
+                                      child: CupertinoListTile(
+                                          backgroundColor:
+                                              Colors.blueGrey.shade100,
+                                          title: Text("Optional 3",
+                                              style: Theme.of(context)
+                                                  .textTheme
+                                                  .labelSmall!
+                                                  .copyWith(
+                                                      color: Colors.blueGrey)),
+                                          subtitle: Text(
+                                              ' ${templates[index]['optional3']}',
+                                              style: Theme.of(context)
+                                                  .textTheme
+                                                  .labelLarge!
+                                                  .copyWith(
+                                                      color: Colors
+                                                          .grey.shade800)))),
+                              templates[index]['optional4'].toString().isEmpty
+                                  ? SizedBox(height: 0)
+                                  : Padding(
+                                      padding:
+                                          EdgeInsets.symmetric(vertical: 2.0),
+                                      child: CupertinoListTile(
+                                          backgroundColor:
+                                              Colors.blueGrey.shade100,
+                                          title: Text("Optional 4",
+                                              style: Theme.of(context)
+                                                  .textTheme
+                                                  .labelSmall!
+                                                  .copyWith(
+                                                      color: Colors.blueGrey)),
+                                          subtitle: Text(
+                                              ' ${templates[index]['optional4']}',
+                                              style: Theme.of(context)
+                                                  .textTheme
+                                                  .labelLarge!
+                                                  .copyWith(
+                                                      color: Colors
+                                                          .grey.shade800)))),
                               Row(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceEvenly,
@@ -544,8 +546,8 @@ class _TemplatesPageState extends State<TemplatesPage> {
   showTemplateAlertF(context) {
     TextEditingController templateNameController = TextEditingController();
     TextEditingController writingSamplesController = TextEditingController();
-    TextEditingController dateController = TextEditingController();
     TextEditingController reportController = TextEditingController();
+    TextEditingController dateController = TextEditingController();
     TextEditingController optionalController1 = TextEditingController();
     TextEditingController optionalController2 = TextEditingController();
     TextEditingController optionalController3 = TextEditingController();
@@ -657,17 +659,6 @@ class _TemplatesPageState extends State<TemplatesPage> {
                         showSnackbarF(msg: "Required Name", context: context);
                       } else if (writingSamplesController.text.trim().isEmpty) {
                         showSnackbarF(msg: "Write Sample", context: context);
-                        // } else if (clientNameController.text.trim().isEmpty) {
-                        //   showSnackbarF(
-                        //       msg: "Required Client Name", context: context);
-                        // } else if (dateController.text.trim().isEmpty) {
-                        //   showSnackbarF(msg: "Required Date", context: context);
-                        // } else if (locationController.text.trim().isEmpty) {
-                        //   showSnackbarF(
-                        //       msg: "Required Location", context: context);
-                        // } else if (othersController.text.trim().isEmpty) {
-                        //   showSnackbarF(
-                        //       msg: "Required Others Field", context: context);
                       } else {
                         // await Hive.openBox("templates");
                         var box = Hive.box('templates');
