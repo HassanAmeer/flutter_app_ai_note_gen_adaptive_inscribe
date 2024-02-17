@@ -20,8 +20,9 @@ class Api {
   // static const _apiKey = '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';
   // static const _apiKey = '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';
   // static const _apiKey = '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';
-  static const _apiKey =
-      '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'; // free api key from viral shorts
+  // static const _apiKey =
+  //     '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'; // paid api from ipa app
+  // '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'; // free api key from viral shorts
   // var _apiKey = GetKey().apiKey; ///// remaining to attach firebase only
 
   static const _timeOut = Duration(seconds: 150);
@@ -37,9 +38,10 @@ class Api {
 }
 
 class AuthInterceptor extends InterceptorsWrapper {
+  var _apiKey = GetKey().apiKey;
   @override
   void onRequest(options, handler) {
-    options.headers['Authorization'] = 'Bearer ${Api._apiKey}';
+    options.headers['Authorization'] = 'Bearer ${_apiKey}';
     return handler.next(options);
   }
 }
