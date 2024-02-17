@@ -4,6 +4,7 @@ import 'package:adaptive_inscribe/utils/snackbar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:adaptive_inscribe/utils/utils.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:provider/provider.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:adaptive_inscribe/models/notes_model.dart';
@@ -19,6 +20,7 @@ import 'services/services.dart';
 import 'src/modals/loading_dialog.dart';
 import 'src/models/models.dart';
 import 'templates.dart';
+import 'vm/getkeyVm.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -70,6 +72,7 @@ class _HomeScreenState extends State<HomeScreen> {
         "email": "abc@gmail.com",
       });
     }
+    Provider.of<GetKey>(context, listen: false).getKeyVmF();
     super.initState();
   }
 
