@@ -353,13 +353,14 @@ class _TemplatesPageState extends State<TemplatesPage> {
 // Add a function to delete a template
   void deleteTemplate(int index) async {
     var box = await Hive.openBox("templates");
-    var data = box.get('templateskey');
-    data.removeAt(index);
-    box.put('templateskey', data);
+    // var data = box.get('templateskey');
+    // data.removeAt(index);
+    List newTemplates = templates.removeAt(index);
+    box.put('templateskey', newTemplates);
 
     // Update the UI
     setState(() {
-      templates.removeAt(index);
+      // templates.removeAt(index);
     });
   }
 
