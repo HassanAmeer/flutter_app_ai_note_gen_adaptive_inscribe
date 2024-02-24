@@ -3,7 +3,13 @@ library services;
 // import 'dart:io';
 // import 'package:cloud_firestore/cloud_firestore.dart';
 // import 'package:device_info_plus/device_info_plus.dart';
+import 'dart:convert';
+import 'dart:developer';
+import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+
 import 'package:dio/dio.dart';
+import 'package:provider/provider.dart';
 // import 'package:firebase_storage/firebase_storage.dart';
 // import 'package:flutter/foundation.dart';
 import 'package:retrofit/retrofit.dart';
@@ -38,10 +44,48 @@ class Api {
 }
 
 class AuthInterceptor extends InterceptorsWrapper {
-  var _apiKey = GetKey().apiKey;
+  var _apiKey = GetKey().apiKey ??
+      "sk-5Y4e08x3RihDWJuV4nRET3BlbkFJllgyJkVV6Jg6frbNcBz"; // k
   @override
   void onRequest(options, handler) {
-    options.headers['Authorization'] = 'Bearer ${_apiKey}';
-    return handler.next(options);
+    log("👉 _apiKey $_apiKey");
+    log("👉 GetKey().apiKey  ${GetKey().apiKey}");
+
+    // options.headers['Authorization'] = 'Bearer ${_apiKey}';
+    // return handler.next(options);
+  }
+}
+
+class AiC {
+  Future<String?> getResponceF(String promptText, context) async {
+    // var apiK = await GetKey().apiKey;
+    var apiK = await Provider.of<GetKey>(context, listen: false).apiKey;
+    try {
+      final response = await http.post(
+        Uri.parse('https://api.openai.com/v1/chat/completions'),
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer $apiK',
+        },
+        body: jsonEncode({
+          "model": "gpt-3.5-turbo",
+          "messages": [
+            {"role": "user", "content": "$promptText"},
+          ],
+        }),
+      );
+
+      // if (response.statusCode == 200) {
+      var resp = json.decode(response.body);
+      // debugPrint("👉 resp: $resp");
+
+      return resp["choices"][0]["message"]['content'];
+      // } else {
+      //   throw Exception('Failed to get response');
+      // }
+    } catch (e) {
+      print("when get AIC Response $e ");
+      return null;
+    }
   }
 }

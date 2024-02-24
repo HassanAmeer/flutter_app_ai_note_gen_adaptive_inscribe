@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'dart:math';
 import 'package:adaptive_inscribe/utils/snackbar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -10,15 +9,12 @@ import 'package:flutter/material.dart';
 import 'package:adaptive_inscribe/models/notes_model.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:clipboard/clipboard.dart';
-
-import 'package:http/http.dart' as http;
 import 'auth/login.dart';
 import 'auth/profile_view.dart';
 import 'boxes/boxes.dart';
 import 'controllers/app_navigation.dart';
 import 'services/services.dart';
 import 'src/modals/loading_dialog.dart';
-import 'src/models/models.dart';
 import 'templates.dart';
 import 'vm/getkeyVm.dart';
 
@@ -44,7 +40,7 @@ class _HomeScreenState extends State<HomeScreen> {
   TextEditingController optionalController2 = TextEditingController();
   TextEditingController optionalController3 = TextEditingController();
   TextEditingController optionalController4 = TextEditingController();
-
+  var templateName = "";
   FocusNode _titleController = FocusNode();
   FocusNode _descriptionController = FocusNode();
 
@@ -72,8 +68,12 @@ class _HomeScreenState extends State<HomeScreen> {
         "email": "abc@gmail.com",
       });
     }
-    Provider.of<GetKey>(context, listen: false).getKeyVmF();
+    getKeyVmInitF();
     super.initState();
+  }
+
+  getKeyVmInitF() async {
+    Provider.of<GetKey>(context, listen: false).getKeyVmF();
   }
 
   String dropdownvalue = 'Template';
@@ -354,22 +354,22 @@ class _HomeScreenState extends State<HomeScreen> {
                                     fontWeight: FontWeight.w500,
                                     color: Colors.white),
                               ),
-                              subtitle: Text(
-                                data[index]
-                                            .description
-                                            .trim()
-                                            .toString()
-                                            .length >=
-                                        35
-                                    ? data[index]
-                                            .description
-                                            .trim()
-                                            .toString()
-                                            .substring(0, 34) +
-                                        ".."
-                                    : data[index].description.toString(),
-                                style: TextStyle(color: Colors.white),
-                              ),
+                              // subtitle: Text(
+                              //   data[index]
+                              //               .description
+                              //               .trim()
+                              //               .toString()
+                              //               .length >=
+                              //           35
+                              //       ? data[index]
+                              //               .description
+                              //               .trim()
+                              //               .toString()
+                              //               .substring(0, 34) +
+                              //           ".."
+                              //       : data[index].description.toString(),
+                              //   style: TextStyle(color: Colors.white),
+                              // ),
                               children: [
                                 Text(
                                   data[index].description.toString(),
@@ -477,12 +477,17 @@ class _HomeScreenState extends State<HomeScreen> {
           return StatefulBuilder(builder: (context, setStates) {
             return AlertDialog(
               title: Text('Create New Note'),
+              contentPadding: EdgeInsets.symmetric(horizontal: 10),
               content: SingleChildScrollView(
                   child: Column(children: [
-                TextFormField(
-                    controller: notetitleController,
-                    decoration: const InputDecoration(
-                        hintText: 'Note title', border: OutlineInputBorder())),
+                SizedBox(
+                  height: MediaQuery.of(context).size.height * 0.07,
+                  child: TextFormField(
+                      controller: notetitleController,
+                      decoration: const InputDecoration(
+                          hintText: 'Note title',
+                          border: OutlineInputBorder())),
+                ),
                 const SizedBox(height: 5),
                 DropdownButton(
                     // value: selectTemplate ?? "Select Template",
@@ -498,6 +503,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       //     selectedTemplate['name'] ?? '';
                       // selectTemplate = selectedTemplate ?? 'Select Template';
                       hintController.text = selectedTemplate['name'] ?? '';
+                      templateName = selectedTemplate['name'] ?? '';
                       sampleController.text = selectedTemplate['sample'] ?? '';
                       reportController.text = selectedTemplate['report'] ?? '';
                       dateController.text = selectedTemplate['date'] ?? '';
@@ -519,65 +525,107 @@ class _HomeScreenState extends State<HomeScreen> {
                 templateValueName == "Select a template"
                     ? Text('')
                     : Column(children: [
-                        Text("Details",
+                        Text("Details 📜",
                             style: TextStyle(
-                                fontSize: 15, fontWeight: FontWeight.w500)),
+                                fontSize: 18, fontWeight: FontWeight.bold)),
                         const SizedBox(height: 5),
-                        TextFormField(
-                            controller: sampleController,
-                            minLines: 2,
-                            maxLines: 2,
-                            decoration: const InputDecoration(
-                                hintText: 'Sample',
-                                border: OutlineInputBorder())),
+                        CupertinoTextField(
+                          minLines: 3,
+                          maxLines: 4,
+                          controller: sampleController,
+                          placeholder: "Writing Sample",
+                        ),
                         const SizedBox(height: 5),
-                        TextFormField(
+                        CupertinoTextField(
+                            minLines: 3,
+                            maxLines: 4,
                             controller: reportController,
-                            minLines: 2,
-                            maxLines: 2,
-                            decoration: const InputDecoration(
-                                hintText: 'Report',
-                                border: OutlineInputBorder())),
+                            placeholder: "Report"),
                         const SizedBox(height: 5),
                         dateController.text.toString().trim().isEmpty
                             ? SizedBox(height: 0)
-                            : TextFormField(
+                            : CupertinoTextField(
                                 controller: dateController,
-                                decoration: const InputDecoration(
-                                    hintText: 'Date',
-                                    border: OutlineInputBorder())),
+                                placeholder: "Date"),
                         const SizedBox(height: 5),
                         optionalController1.text.toString().trim().isEmpty
                             ? SizedBox(height: 0)
-                            : TextFormField(
+                            : CupertinoTextField(
                                 controller: optionalController1,
-                                decoration: const InputDecoration(
-                                    hintText: 'Optional 1',
-                                    border: OutlineInputBorder())),
+                                placeholder: "Optional 1"),
                         const SizedBox(height: 5),
                         optionalController2.text.toString().trim().isEmpty
                             ? SizedBox(height: 0)
-                            : TextFormField(
+                            : CupertinoTextField(
                                 controller: optionalController2,
-                                decoration: const InputDecoration(
-                                    hintText: 'Optional 2',
-                                    border: OutlineInputBorder())),
+                                placeholder: "Optional 2"),
                         const SizedBox(height: 5),
                         optionalController3.text.toString().trim().isEmpty
                             ? SizedBox(height: 0)
-                            : TextFormField(
+                            : CupertinoTextField(
                                 controller: optionalController3,
-                                decoration: const InputDecoration(
-                                    hintText: 'Optional 3',
-                                    border: OutlineInputBorder())),
+                                placeholder: "Optional 3"),
                         const SizedBox(height: 5),
                         optionalController4.text.toString().trim().isEmpty
                             ? SizedBox(height: 0)
-                            : TextFormField(
+                            : CupertinoTextField(
                                 controller: optionalController4,
-                                decoration: const InputDecoration(
-                                    hintText: 'Optional 4',
-                                    border: OutlineInputBorder())),
+                                placeholder: "Optional 4"),
+                        // TextFormField(
+                        //     controller: dateController,
+                        //     minLines: 2,
+                        //     maxLines: 2,
+                        //     decoration: const InputDecoration(
+                        //         hintText: 'Sample',
+                        //         border: OutlineInputBorder())),
+                        // const SizedBox(height: 5),
+                        // TextFormField(
+                        //     controller: reportController,
+                        //     minLines: 2,
+                        //     maxLines: 2,
+                        //     decoration: const InputDecoration(
+                        //         hintText: 'Report',
+                        //         border: OutlineInputBorder())),
+                        // const SizedBox(height: 5),
+                        // dateController.text.toString().trim().isEmpty
+                        //     ? SizedBox(height: 0)
+                        //     : TextFormField(
+                        //         controller: dateController,
+                        //         decoration: const InputDecoration(
+                        //             hintText: 'Date',
+                        //             border: OutlineInputBorder())),
+                        // const SizedBox(height: 5),
+                        // optionalController1.text.toString().trim().isEmpty
+                        //     ? SizedBox(height: 0)
+                        //     : TextFormField(
+                        //         controller: optionalController1,
+                        //         decoration: const InputDecoration(
+                        //             hintText: 'Optional 1',
+                        //             border: OutlineInputBorder())),
+                        // const SizedBox(height: 5),
+                        // optionalController2.text.toString().trim().isEmpty
+                        //     ? SizedBox(height: 0)
+                        //     : TextFormField(
+                        //         controller: optionalController2,
+                        //         decoration: const InputDecoration(
+                        //             hintText: 'Optional 2',
+                        //             border: OutlineInputBorder())),
+                        // const SizedBox(height: 5),
+                        // optionalController3.text.toString().trim().isEmpty
+                        //     ? SizedBox(height: 0)
+                        //     : TextFormField(
+                        //         controller: optionalController3,
+                        //         decoration: const InputDecoration(
+                        //             hintText: 'Optional 3',
+                        //             border: OutlineInputBorder())),
+                        // const SizedBox(height: 5),
+                        // optionalController4.text.toString().trim().isEmpty
+                        //     ? SizedBox(height: 0)
+                        //     : TextFormField(
+                        //         controller: optionalController4,
+                        //         decoration: const InputDecoration(
+                        //             hintText: 'Optional 4',
+                        //             border: OutlineInputBorder())),
                       ]),
                 const SizedBox(height: 5),
               ])),
@@ -601,28 +649,24 @@ class _HomeScreenState extends State<HomeScreen> {
                         } else {
                           try {
                             $showLoadingDialog(context, 'Retrieving Notes');
-                            final prompt =
-                                'Create an Cover Letter between 100 to 120 words. according to The main data is Writing Sample: ${sampleController.text}, and report: ${reportController.text}, and little bit information if need from these:';
-                            '${dateController.text.isEmpty ? '' : '${dateController.text} '}'
-                                '${optionalController1.text.isEmpty ? '' : '${optionalController1.text} '}'
-                                '${optionalController2.text.isEmpty ? '' : '${optionalController2.text} '}'
-                                '${optionalController3.text.isEmpty ? '' : '${optionalController3.text} '}'
-                                '${optionalController4.text.isEmpty ? '' : '${optionalController4.text} '}';
-
-                            final result = await GptApiService()
-                                .messageCompletion(
-                                    ChatGPTCompletionRequest(prompt: prompt));
-                            final resultDecode = result.choices.first.text;
+                            final prompt = 'This is an Example of a $templateName That i write. ${sampleController.text}, Complete a similar note with using the following information:' +
+                                '${dateController.text.isEmpty ? '' : '${dateController.text} '},'
+                                    '${optionalController1.text.isEmpty ? '' : '${optionalController1.text} '},'
+                                    '${optionalController2.text.isEmpty ? '' : '${optionalController2.text} '},'
+                                    '${optionalController3.text.isEmpty ? '' : '${optionalController3.text} '},'
+                                    '${optionalController4.text.isEmpty ? '' : '${optionalController4.text} '},';
+                            '${reportController.text.isEmpty ? '' : 'Report: ${reportController.text} '}';
+                            // debugPrint("📜 $prompt");
+                            // final result = await GptApiService()
+                            //     .messageCompletion(
+                            //         ChatGPTCompletionRequest(prompt: prompt));
+                            // final resultDecode = result.choices.first.text;
+                            var resultDecode =
+                                await AiC().getResponceF(prompt, context);
                             // debugPrint("👉" + resultDecode.toString());
                             final data = NotesModel(
                                 title: notetitleController.text,
-                                description: resultDecode.toString() +
-                                    "\n" +
-                                    '${dateController.text.isEmpty ? '' : dateController.text} \n'
-                                        '${optionalController1.text.isEmpty ? '' : optionalController1.text}\n'
-                                        '${optionalController2.text.isEmpty ? '' : optionalController2.text}\n'
-                                        '${optionalController3.text.isEmpty ? '' : optionalController3.text}\n'
-                                        '${optionalController4.text.isEmpty ? '' : optionalController4.text}\n');
+                                description: resultDecode.toString());
                             final box = Boxes.getData();
                             box.add(data);
                             // notetitleController.clear();

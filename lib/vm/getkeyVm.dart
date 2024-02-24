@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 class GetKey extends ChangeNotifier {
-  String _key = "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";
+  String _key = "sk-apiKey";
 
   String get apiKey => _key;
 
@@ -13,14 +13,14 @@ class GetKey extends ChangeNotifier {
 
       if (keysSnapshot.docs.isNotEmpty) {
         var keyData = keysSnapshot.docs.first.data();
-        _key = keyData['apikey'];
+        _key = keyData['apikey'].toString();
       } else {
-        _key = "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";
+        _key = "sk-apiKey";
       }
       notifyListeners();
     } catch (error) {
       debugPrint("💥 Error retrieving key: $error");
-      _key = "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";
+      _key = "sk-apiKey";
       notifyListeners();
     }
     debugPrint("👉 apiKey: $_key");

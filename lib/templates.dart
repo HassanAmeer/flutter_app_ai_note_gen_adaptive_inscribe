@@ -49,11 +49,10 @@ class _TemplatesPageState extends State<TemplatesPage> {
         ],
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          showTemplateAlertF(context);
-        },
-        child: Icon(Icons.add),
-      ),
+          onPressed: () {
+            showTemplateAlertF(context);
+          },
+          child: Icon(Icons.add)),
       body: templates.isEmpty
           ? Center(
               child: Text(
