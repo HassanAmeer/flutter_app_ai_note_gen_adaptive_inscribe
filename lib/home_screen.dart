@@ -654,8 +654,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                     '${optionalController1.text.isEmpty ? '' : '${optionalController1.text} '},'
                                     '${optionalController2.text.isEmpty ? '' : '${optionalController2.text} '},'
                                     '${optionalController3.text.isEmpty ? '' : '${optionalController3.text} '},'
-                                    '${optionalController4.text.isEmpty ? '' : '${optionalController4.text} '},';
-                            '${reportController.text.isEmpty ? '' : 'Report: ${reportController.text} '}';
+                                    '${optionalController4.text.isEmpty ? '' : '${optionalController4.text} '},'
+                                    '${reportController.text.isEmpty ? '' : 'Report: ${reportController.text} '}';
                             // debugPrint("📜 $prompt");
                             // final result = await GptApiService()
                             //     .messageCompletion(
