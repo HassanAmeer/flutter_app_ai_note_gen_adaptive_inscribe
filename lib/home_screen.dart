@@ -571,61 +571,6 @@ class _HomeScreenState extends State<HomeScreen> {
                             : CupertinoTextField(
                                 controller: optionalController4,
                                 placeholder: "Optional 4"),
-                        // TextFormField(
-                        //     controller: dateController,
-                        //     minLines: 2,
-                        //     maxLines: 2,
-                        //     decoration: const InputDecoration(
-                        //         hintText: 'Sample',
-                        //         border: OutlineInputBorder())),
-                        // const SizedBox(height: 5),
-                        // TextFormField(
-                        //     controller: reportController,
-                        //     minLines: 2,
-                        //     maxLines: 2,
-                        //     decoration: const InputDecoration(
-                        //         hintText: 'Report',
-                        //         border: OutlineInputBorder())),
-                        // const SizedBox(height: 5),
-                        // dateController.text.toString().trim().isEmpty
-                        //     ? SizedBox(height: 0)
-                        //     : TextFormField(
-                        //         controller: dateController,
-                        //         decoration: const InputDecoration(
-                        //             hintText: 'Date',
-                        //             border: OutlineInputBorder())),
-                        // const SizedBox(height: 5),
-                        // optionalController1.text.toString().trim().isEmpty
-                        //     ? SizedBox(height: 0)
-                        //     : TextFormField(
-                        //         controller: optionalController1,
-                        //         decoration: const InputDecoration(
-                        //             hintText: 'Optional 1',
-                        //             border: OutlineInputBorder())),
-                        // const SizedBox(height: 5),
-                        // optionalController2.text.toString().trim().isEmpty
-                        //     ? SizedBox(height: 0)
-                        //     : TextFormField(
-                        //         controller: optionalController2,
-                        //         decoration: const InputDecoration(
-                        //             hintText: 'Optional 2',
-                        //             border: OutlineInputBorder())),
-                        // const SizedBox(height: 5),
-                        // optionalController3.text.toString().trim().isEmpty
-                        //     ? SizedBox(height: 0)
-                        //     : TextFormField(
-                        //         controller: optionalController3,
-                        //         decoration: const InputDecoration(
-                        //             hintText: 'Optional 3',
-                        //             border: OutlineInputBorder())),
-                        // const SizedBox(height: 5),
-                        // optionalController4.text.toString().trim().isEmpty
-                        //     ? SizedBox(height: 0)
-                        //     : TextFormField(
-                        //         controller: optionalController4,
-                        //         decoration: const InputDecoration(
-                        //             hintText: 'Optional 4',
-                        //             border: OutlineInputBorder())),
                       ]),
                 const SizedBox(height: 5),
               ])),
@@ -649,7 +594,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         } else {
                           try {
                             $showLoadingDialog(context, 'Retrieving Notes');
-                            final prompt = 'This is an Example of a $templateName That i write. ${sampleController.text}, Complete a similar note with using the following information:' +
+                            final prompt = 'This is an Example of a $templateName That i write. ${sampleController.text}, Complete a similar note with same paragrapgh format using the following information:' +
                                 '${dateController.text.isEmpty ? '' : '${dateController.text} '},'
                                     '${optionalController1.text.isEmpty ? '' : '${optionalController1.text} '},'
                                     '${optionalController2.text.isEmpty ? '' : '${optionalController2.text} '},'
@@ -663,7 +608,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             // final resultDecode = result.choices.first.text;
                             var resultDecode =
                                 await AiC().getResponceF(prompt, context);
-                            // debugPrint("👉" + resultDecode.toString());
+                            debugPrint("👉" + resultDecode.toString());
                             final data = NotesModel(
                                 title: notetitleController.text,
                                 description: resultDecode.toString());
@@ -674,7 +619,6 @@ class _HomeScreenState extends State<HomeScreen> {
                             Navigator.pop(context);
                             Navigator.pop(context);
                           } catch (e) {
-                            debugPrint("💥 when generate a note:  $e");
                             debugPrint("💥 when generate a note: $e");
                             ScaffoldMessenger.of(context).showSnackBar(
                               SnackBar(

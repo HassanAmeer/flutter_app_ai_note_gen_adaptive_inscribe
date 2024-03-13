@@ -45,7 +45,8 @@ class Api {
 
 class AuthInterceptor extends InterceptorsWrapper {
   var _apiKey = GetKey().apiKey ??
-      "sk-5Y4e08x3RihDWJuV4nRET3BlbkFJllgyJkVV6Jg6frbNcBz"; // k
+      "sk-EO07XgN5UMMbsxVbUsejT3BlbkFJKgALJTl757EsJPAlfWk"; // r
+  // "sk-5Y4e08x3RihDWJuV4nRET3BlbkFJllgyJkVV6Jg6frbNcBz"; // k
   @override
   void onRequest(options, handler) {
     log("👉 _apiKey $_apiKey");
@@ -77,7 +78,7 @@ class AiC {
 
       // if (response.statusCode == 200) {
       var resp = json.decode(response.body);
-      // debugPrint("👉 resp: $resp");
+      debugPrint("👉 resp: $resp");
 
       return resp["choices"][0]["message"]['content'];
       // } else {
