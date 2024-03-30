@@ -15,6 +15,7 @@ import 'boxes/boxes.dart';
 import 'controllers/app_navigation.dart';
 import 'services/services.dart';
 import 'src/modals/loading_dialog.dart';
+import 'src/models/models.dart';
 import 'templates.dart';
 import 'vm/getkeyVm.dart';
 
@@ -73,7 +74,7 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   getKeyVmInitF() async {
-    Provider.of<GetKey>(context, listen: false).getKeyVmF();
+    await Provider.of<GetKey>(context, listen: false).getKeyVmF();
   }
 
   String dropdownvalue = 'Template';
@@ -602,16 +603,18 @@ class _HomeScreenState extends State<HomeScreen> {
                                     '${optionalController4.text.isEmpty ? '' : '${optionalController4.text} '},'
                                     '${reportController.text.isEmpty ? '' : 'Report: ${reportController.text} '}';
                             // debugPrint("📜 $prompt");
-                            // final result = await GptApiService()
-                            //     .messageCompletion(
-                            //         ChatGPTCompletionRequest(prompt: prompt));
-                            // final resultDecode = result.choices.first.text;
-                            var resultDecode =
-                                await AiC().getResponceF(prompt, context);
-                            debugPrint("👉" + resultDecode.toString());
+                            var apiKey = await Provider.of<GetKey>(context,
+                                    listen: false)
+                                .apiKey;
+                            final resultDecode = await GptApiService("$apiKey")
+                                .messageCompletion(
+                                    ChatGPTCompletionRequest(prompt: prompt));
+                            // debugPrint(
+                            //     "👉 resultDecode:" + resultDecode.toString());
                             final data = NotesModel(
                                 title: notetitleController.text,
-                                description: resultDecode.toString());
+                                description:
+                                    resultDecode.choices.first.text.toString());
                             final box = Boxes.getData();
                             box.add(data);
                             // notetitleController.clear();
